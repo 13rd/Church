@@ -1,9 +1,11 @@
+from typing import List
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from api.models import UserCreate, ShowUser
-from db.dals import UserDAL
+
+from api.schemas.user import ShowUser, UserCreate
+from db.dals.user import UserDAL
 from db.session import get_db
-from typing import List
 
 
 user_router = APIRouter()
