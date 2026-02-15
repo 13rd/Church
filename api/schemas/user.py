@@ -1,5 +1,7 @@
 import re
 import uuid
+from uuid import UUID
+
 from fastapi import HTTPException
 from pydantic import BaseModel, EmailStr, field_validator
 
@@ -7,23 +9,34 @@ from pydantic import BaseModel, EmailStr, field_validator
 LETTER_MATCH_PATTERN = re.compile(r"^[а-яА-Яa-zA-Z\-]+$")
 
 
-class TunedModel(BaseModel):
-    class Config:
-        orm_mode = True
+# class TunedModel(BaseModel):
+#     class Config:
+#         orm_mode = True
+#
+#
+# class ShowUser(TunedModel):
+#     user_id: uuid.UUID
+#     name: str
+#     surname: str
+#     email: EmailStr
+#     is_active: bool
 
-
-class ShowUser(TunedModel):
-    user_id: uuid.UUID
+class UserBase(BaseModel):
     name: str
     surname: str
     email: EmailStr
+
+
+class ShowUser(UserBase):
+    user_id: UUID
     is_active: bool
 
+    class Config:
+        from_attributes = True
 
-class UserCreate(BaseModel):
-    name: str
-    surname: str
-    email: EmailStr
+
+class UserCreate(UserBase):
+    password: str
 
     @field_validator("name")
     def validate_name(cls, value):
@@ -40,3 +53,11 @@ class UserCreate(BaseModel):
                 status_code=422, detail="Surname should contains only letters"
             )
         return value
+
+    @field_validator("email")
+    def validate_email(cls, value):
+        ...
+
+    @field_validator("password")
+    def validate_password(cls, value):
+        ...
