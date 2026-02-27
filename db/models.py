@@ -157,7 +157,3 @@ class TextBlock(Base, TimestampMixin, SoftDeleteMixin):
     # __table_args__ = (
     #     Index("ix_text_blocks_slug_deleted", "slug", "deleted"),
     # )
-
-
-
-# TODO: add mixin for timestamp and softdelete
