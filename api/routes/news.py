@@ -1,8 +1,7 @@
 from typing import List
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
-from starlette.exceptions import HTTPException
 from api.schemas.news import NewsResponse, NewsCreate, NewsUpdate
 from api.service.news import NewsService
 from db.session import get_db
