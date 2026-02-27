@@ -122,7 +122,7 @@ class TextBlock(Base):
         nullable=False,
     )
     body: Mapped[str] = mapped_column(
-        String,
+        Text,
         nullable=False,
         default="Text Sample",
     )
