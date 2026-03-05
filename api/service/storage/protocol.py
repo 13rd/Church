@@ -1,12 +1,16 @@
 from abc import ABC, abstractmethod
-from api.schemas.media import MediaUploadResult
+from typing import BinaryIO
 
 class StorageProtocol(ABC):
     @abstractmethod
-    async def upload(self, file: str) -> MediaUploadResult: ...
+    async def save(self, file: BinaryIO, filename: str) -> str:
+        """
+        Save media and return filepath/url to file
+
+        """
 
     @abstractmethod
-    async def delete(self, file_id: str) -> bool: ...
-
-    @abstractmethod
-    async def get_url(self, file_id: str) -> str: ...
+    async def delete(self, path: str) -> None: ...
+    #
+    # @abstractmethod
+    # async def get_url(self, file_id: str) -> str: ...
