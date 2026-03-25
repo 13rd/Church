@@ -30,7 +30,7 @@ class Settings(BaseSettings):
             path=self.POSTGRES_DB,
         )
 
-    JWT_SECRET_KEY: str = Field(..., min_length=32)
+    JWT_SECRET_KEY: str = "default-jwt-secret"
     JWT_ALGORITHM: str = "HS256"
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
